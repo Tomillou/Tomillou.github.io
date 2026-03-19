@@ -1,0 +1,1023 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>OilGuard Pro — Filtre coalescent pour réseaux de gaz</title>
+  <meta name="description" content="Site vitrine et e-commerce pour un filtre coalescent professionnel conçu pour capter les huiles dans les réseaux de gaz et protéger les installations." />
+  <style>
+    :root {
+      --bg: #08111f;
+      --bg-soft: #0d1830;
+      --card: rgba(14, 24, 49, 0.86);
+      --line: rgba(255,255,255,0.10);
+      --text: #eef4ff;
+      --muted: #a9b6cf;
+      --primary: #2fd1ff;
+      --primary-dark: #0da7da;
+      --accent: #7dfcba;
+      --danger: #ff8f8f;
+      --shadow: 0 18px 40px rgba(0, 0, 0, 0.35);
+      --radius: 22px;
+      --radius-sm: 14px;
+      --max: 1200px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background:
+        radial-gradient(circle at top right, rgba(47, 209, 255, 0.10), transparent 24%),
+        radial-gradient(circle at top left, rgba(125, 252, 186, 0.09), transparent 18%),
+        linear-gradient(180deg, #07101d 0%, #091222 45%, #060c16 100%);
+      color: var(--text);
+      line-height: 1.55;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    .container {
+      width: min(100% - 32px, var(--max));
+      margin: 0 auto;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      backdrop-filter: blur(16px);
+      background: rgba(7, 16, 29, 0.78);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      min-height: 76px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 800;
+      letter-spacing: 0.2px;
+      font-size: 1.05rem;
+    }
+
+    .brand-mark {
+      width: 42px;
+      height: 42px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      color: #02131a;
+      display: grid;
+      place-items: center;
+      font-weight: 900;
+      box-shadow: var(--shadow);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 22px;
+      align-items: center;
+      color: var(--muted);
+      font-size: 0.97rem;
+    }
+
+    .nav-links a:hover {
+      color: var(--text);
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .btn,
+    button {
+      border: 0;
+      cursor: pointer;
+      transition: 0.25s ease;
+      font: inherit;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 14px 20px;
+      border-radius: 999px;
+      font-weight: 700;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      color: #04111b;
+      box-shadow: 0 12px 24px rgba(47, 209, 255, 0.18);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      filter: brightness(1.02);
+    }
+
+    .btn-secondary {
+      background: rgba(255, 255, 255, 0.05);
+      color: var(--text);
+      border: 1px solid var(--line);
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    .hero {
+      padding: 72px 0 40px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 36px;
+      align-items: center;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 14px;
+      border-radius: 999px;
+      background: rgba(47, 209, 255, 0.10);
+      color: var(--accent);
+      border: 1px solid rgba(47, 209, 255, 0.18);
+      font-size: 0.92rem;
+      margin-bottom: 18px;
+    }
+
+    h1 {
+      font-size: clamp(2.4rem, 5vw, 4.4rem);
+      line-height: 1.02;
+      letter-spacing: -1.8px;
+      margin-bottom: 18px;
+    }
+
+    .hero p {
+      font-size: 1.08rem;
+      color: var(--muted);
+      max-width: 62ch;
+      margin-bottom: 24px;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-bottom: 26px;
+    }
+
+    .hero-metrics {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 20px;
+    }
+
+    .metric {
+      padding: 18px;
+      border-radius: var(--radius-sm);
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--line);
+    }
+
+    .metric strong {
+      display: block;
+      font-size: 1.3rem;
+      margin-bottom: 6px;
+    }
+
+    .metric span {
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    .hero-card,
+    .card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+
+    .hero-card {
+      padding: 22px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .product-visual {
+      min-height: 440px;
+      border-radius: 20px;
+      background:
+        radial-gradient(circle at 50% 30%, rgba(47, 209, 255, 0.28), transparent 18%),
+        linear-gradient(180deg, #112346 0%, #0c1630 100%);
+      border: 1px solid rgba(255,255,255,0.08);
+      display: grid;
+      place-items: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .product-cylinder {
+      width: 220px;
+      height: 310px;
+      border-radius: 46px;
+      background: linear-gradient(135deg, #dce8f5 0%, #9db4c9 32%, #f4fbff 52%, #7e95ad 76%, #d8e7f6 100%);
+      position: relative;
+      box-shadow:
+        inset -16px 0 24px rgba(0,0,0,0.15),
+        inset 16px 0 22px rgba(255,255,255,0.25),
+        0 20px 50px rgba(0, 0, 0, 0.35);
+    }
+
+    .product-cylinder::before,
+    .product-cylinder::after {
+      content: "";
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 180px;
+      height: 28px;
+      border-radius: 999px;
+      background: linear-gradient(180deg, #3b4350, #10161f);
+      box-shadow: inset 0 4px 6px rgba(255,255,255,0.18);
+    }
+
+    .product-cylinder::before {
+      top: -12px;
+    }
+
+    .product-cylinder::after {
+      bottom: -12px;
+    }
+
+    .product-band {
+      position: absolute;
+      left: 16px;
+      right: 16px;
+      top: 108px;
+      padding: 12px 14px;
+      border-radius: 16px;
+      background: rgba(7, 17, 33, 0.86);
+      border: 1px solid rgba(255,255,255,0.08);
+      text-align: center;
+    }
+
+    .product-band strong {
+      display: block;
+      font-size: 1.2rem;
+      color: #fff;
+      letter-spacing: 0.5px;
+    }
+
+    .product-band span {
+      color: #9deeff;
+      font-size: 0.9rem;
+    }
+
+    .floating-note {
+      position: absolute;
+      background: rgba(8, 15, 28, 0.88);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 12px 14px;
+      color: var(--text);
+      max-width: 180px;
+      font-size: 0.92rem;
+      box-shadow: var(--shadow);
+    }
+
+    .note-1 { top: 28px; left: 28px; }
+    .note-2 { bottom: 28px; right: 28px; }
+
+    .section {
+      padding: 40px 0;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 20px;
+      margin-bottom: 24px;
+    }
+
+    .section-header h2 {
+      font-size: clamp(1.9rem, 3vw, 3rem);
+      letter-spacing: -1px;
+      margin-bottom: 8px;
+    }
+
+    .section-header p {
+      color: var(--muted);
+      max-width: 70ch;
+    }
+
+    .grid-3,
+    .grid-4,
+    .pricing-grid,
+    .spec-grid,
+    .testimonial-grid,
+    .faq-grid,
+    .footer-grid {
+      display: grid;
+      gap: 18px;
+    }
+
+    .grid-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .grid-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+    .pricing-grid { grid-template-columns: 1.1fr 0.9fr; }
+    .spec-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .testimonial-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .faq-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .footer-grid { grid-template-columns: 1.2fr 0.8fr 0.8fr 0.8fr; }
+
+    .card {
+      padding: 22px;
+    }
+
+    .card h3 {
+      font-size: 1.15rem;
+      margin-bottom: 10px;
+    }
+
+    .card p,
+    .card li,
+    .spec-item span,
+    .testimonial small,
+    footer p,
+    footer li {
+      color: var(--muted);
+    }
+
+    .icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 14px;
+      display: grid;
+      place-items: center;
+      background: rgba(47, 209, 255, 0.12);
+      color: var(--primary);
+      font-weight: 900;
+      margin-bottom: 16px;
+      border: 1px solid rgba(47, 209, 255, 0.18);
+    }
+
+    .product-card {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border-radius: 999px;
+      padding: 7px 12px;
+      font-size: 0.85rem;
+      background: rgba(125, 252, 186, 0.10);
+      color: var(--accent);
+      border: 1px solid rgba(125, 252, 186, 0.16);
+      margin-bottom: 14px;
+    }
+
+    .price {
+      display: flex;
+      align-items: baseline;
+      gap: 8px;
+      margin: 10px 0 16px;
+    }
+
+    .price strong {
+      font-size: 2.4rem;
+      line-height: 1;
+    }
+
+    .price span {
+      color: var(--muted);
+    }
+
+    .feature-list {
+      list-style: none;
+      display: grid;
+      gap: 12px;
+      margin: 18px 0 20px;
+    }
+
+    .feature-list li {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .check {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: rgba(125, 252, 186, 0.14);
+      color: var(--accent);
+      flex: 0 0 24px;
+      font-size: 0.85rem;
+    }
+
+    .spec-item {
+      display: flex;
+      justify-content: space-between;
+      gap: 14px;
+      padding: 14px 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .spec-item:last-child {
+      border-bottom: 0;
+    }
+
+    .spec-item strong {
+      font-size: 0.98rem;
+    }
+
+    .trust-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 16px;
+    }
+
+    .trust-item {
+      padding: 10px 14px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,0.04);
+      color: var(--text);
+      font-size: 0.9rem;
+    }
+
+    .testimonial {
+      position: relative;
+    }
+
+    .testimonial::before {
+      content: "“";
+      position: absolute;
+      top: 10px;
+      right: 18px;
+      font-size: 4rem;
+      line-height: 1;
+      color: rgba(255,255,255,0.08);
+    }
+
+    .testimonial p {
+      margin-bottom: 16px;
+      position: relative;
+      z-index: 1;
+    }
+
+    details {
+      padding: 18px 20px;
+      border-radius: 18px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,0.04);
+    }
+
+    summary {
+      cursor: pointer;
+      font-weight: 700;
+      list-style: none;
+    }
+
+    summary::-webkit-details-marker {
+      display: none;
+    }
+
+    details p {
+      margin-top: 12px;
+      color: var(--muted);
+    }
+
+    .cta-banner {
+      padding: 28px;
+      border-radius: 28px;
+      background:
+        linear-gradient(135deg, rgba(47, 209, 255, 0.14), rgba(125, 252, 186, 0.12)),
+        rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.10);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      box-shadow: var(--shadow);
+    }
+
+    footer {
+      padding: 42px 0 30px;
+      border-top: 1px solid var(--line);
+      margin-top: 30px;
+    }
+
+    footer ul {
+      list-style: none;
+      display: grid;
+      gap: 10px;
+    }
+
+    .footer-brand p {
+      margin-top: 12px;
+      max-width: 38ch;
+    }
+
+    .copyright {
+      margin-top: 24px;
+      padding-top: 16px;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 0.92rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .cart-note {
+      font-size: 0.92rem;
+      color: var(--muted);
+      margin-top: 10px;
+    }
+
+    .mobile-menu {
+      display: none;
+    }
+
+    @media (max-width: 1024px) {
+      .hero-grid,
+      .pricing-grid,
+      .grid-3,
+      .grid-4,
+      .testimonial-grid,
+      .faq-grid,
+      .footer-grid,
+      .spec-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .hero-grid,
+      .pricing-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-card {
+        order: -1;
+      }
+    }
+
+    @media (max-width: 760px) {
+      .nav-links {
+        display: none;
+      }
+
+      .mobile-menu {
+        display: inline-flex;
+      }
+
+      .hero {
+        padding-top: 44px;
+      }
+
+      .grid-3,
+      .grid-4,
+      .testimonial-grid,
+      .faq-grid,
+      .footer-grid,
+      .spec-grid,
+      .hero-metrics {
+        grid-template-columns: 1fr;
+      }
+
+      .section-header,
+      .cta-banner,
+      .copyright {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .product-visual {
+        min-height: 360px;
+      }
+
+      .product-cylinder {
+        transform: scale(0.88);
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="container nav">
+      <a href="#accueil" class="brand">
+        <span class="brand-mark">OG</span>
+        <span>OilGuard Pro</span>
+      </a>
+
+      <nav class="nav-links">
+        <a href="#solution">Solution</a>
+        <a href="#avantages">Avantages</a>
+        <a href="#produit">Produit</a>
+        <a href="#specs">Caractéristiques</a>
+        <a href="#faq">FAQ</a>
+        <a href="#contact">Contact</a>
+      </nav>
+
+      <div class="nav-actions">
+        <a class="btn btn-secondary mobile-menu" href="#produit">Menu</a>
+        <a class="btn btn-secondary" href="#contact">Demande de devis</a>
+        <a class="btn btn-primary" href="#produit">Commander</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="accueil">
+      <div class="container hero-grid">
+        <div>
+          <span class="badge">Protection avancée des réseaux de gaz</span>
+          <h1>Le filtre professionnel qui capture les huiles avant qu’elles n’atteignent votre réseau.</h1>
+          <p>
+            OilGuard Pro est un filtre coalescent conçu pour séparer et retenir les microgouttelettes d’huile issues des compresseurs,
+            afin de protéger les canalisations, les équipements aval et la qualité du gaz distribué.
+          </p>
+
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#produit">Voir le prix</a>
+            <a class="btn btn-secondary" href="#specs">Fiche technique</a>
+          </div>
+
+          <div class="hero-metrics">
+            <div class="metric">
+              <strong>99,5 %</strong>
+              <span>de captation des aérosols d’huile</span>
+            </div>
+            <div class="metric">
+              <strong>16 bar</strong>
+              <span>pression max de service</span>
+            </div>
+            <div class="metric">
+              <strong>24/7</strong>
+              <span>protection continue des installations</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-card">
+          <div class="product-visual">
+            <div class="floating-note note-1">
+              <strong>Séparation coalescente</strong>
+              <div>Les fines particules d’huile fusionnent puis sont retenues.</div>
+            </div>
+
+            <div class="product-cylinder">
+              <div class="product-band">
+                <strong>OilGuard Pro X1</strong>
+                <span>Filtre coalescent pour gaz</span>
+              </div>
+            </div>
+
+            <div class="floating-note note-2">
+              <strong>Maintenance simple</strong>
+              <div>Cartouche remplaçable et accès rapide.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="solution">
+      <div class="container">
+        <div class="section-header">
+          <div>
+            <h2>Une solution pensée pour les réseaux exigeants</h2>
+            <p>
+              Quand l’huile s’échappe au niveau des segments du compresseur, elle dégrade la qualité du gaz, encrasse les lignes et peut nuire aux équipements sensibles. Notre filtre agit comme une barrière haute performance entre la compression et la distribution.
+            </p>
+          </div>
+        </div>
+
+        <div class="grid-3">
+          <article class="card">
+            <div class="icon">01</div>
+            <h3>Protection du réseau</h3>
+            <p>Réduction de l’encrassement des conduites, vannes, régulateurs et équipements aval.</p>
+          </article>
+
+          <article class="card">
+            <div class="icon">02</div>
+            <h3>Qualité du gaz améliorée</h3>
+            <p>Captation des aérosols et brouillards d’huile avant leur dispersion dans la ligne.</p>
+          </article>
+
+          <article class="card">
+            <div class="icon">03</div>
+            <h3>Maintenance maîtrisée</h3>
+            <p>Moins d’interventions correctives et un entretien plus prédictif des installations.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="avantages">
+      <div class="container">
+        <div class="section-header">
+          <div>
+            <h2>Pourquoi choisir OilGuard Pro</h2>
+            <p>Un design premium, une lecture claire de l’offre, et des arguments techniques rassurants comme sur un vrai site industriel de vente.</p>
+          </div>
+        </div>
+
+        <div class="grid-4">
+          <article class="card">
+            <div class="icon">✓</div>
+            <h3>Filtration haute efficacité</h3>
+            <p>Technologie coalescente adaptée aux flux gazeux contaminés par des brouillards d’huile.</p>
+          </article>
+
+          <article class="card">
+            <div class="icon">⚙</div>
+            <h3>Intégration industrielle</h3>
+            <p>Compatible avec les architectures de compression et de distribution les plus courantes.</p>
+          </article>
+
+          <article class="card">
+            <div class="icon">⏱</div>
+            <h3>Intervention rapide</h3>
+            <p>Cartouche accessible, remplacement facilité et temps d’arrêt réduit.</p>
+          </article>
+
+          <article class="card">
+            <div class="icon">🛡</div>
+            <h3>Fiabilité durable</h3>
+            <p>Corps robuste et matériaux conçus pour une exploitation continue en environnement technique.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="produit">
+      <div class="container pricing-grid">
+        <div class="card product-card">
+          <span class="pill">Produit phare</span>
+          <h2 style="font-size: clamp(2rem, 3vw, 3rem); letter-spacing: -1px;">OilGuard Pro X1</h2>
+          <p style="margin-top: 12px; color: var(--muted); max-width: 58ch;">
+            Filtre coalescent premium destiné à la captation des huiles dans les réseaux de gaz, avec cartouche remplaçable, corps renforcé et maintenance simplifiée.
+          </p>
+
+          <div class="price">
+            <strong>1 890 €</strong>
+            <span>HT / unité</span>
+          </div>
+
+          <ul class="feature-list">
+            <li><span class="check">✓</span> Corps aluminium traité anticorrosion</li>
+            <li><span class="check">✓</span> Cartouche coalescente haute performance</li>
+            <li><span class="check">✓</span> Indicateur de maintenance visuel</li>
+            <li><span class="check">✓</span> Raccordement industriel standard</li>
+            <li><span class="check">✓</span> Documentation technique fournie</li>
+          </ul>
+
+          <div class="hero-actions">
+            <button class="btn btn-primary" id="buyNow">Ajouter au panier</button>
+            <a class="btn btn-secondary" href="#contact">Parler à un expert</a>
+          </div>
+
+          <p class="cart-note" id="cartMessage">Livraison estimée : 7 à 10 jours ouvrés • Garantie 24 mois</p>
+
+          <div class="trust-row">
+            <span class="trust-item">Paiement sécurisé</span>
+            <span class="trust-item">Garantie 24 mois</span>
+            <span class="trust-item">Support technique</span>
+            <span class="trust-item">Expédition UE</span>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>Ce qui est inclus</h3>
+          <div class="spec-item"><strong>Filtre OilGuard Pro X1</strong><span>1 unité</span></div>
+          <div class="spec-item"><strong>Cartouche installée</strong><span>Oui</span></div>
+          <div class="spec-item"><strong>Notice d’installation</strong><span>PDF + imprimée</span></div>
+          <div class="spec-item"><strong>Kit de mise en service</strong><span>Inclus</span></div>
+          <div class="spec-item"><strong>Support client</strong><span>Prioritaire</span></div>
+
+          <div style="height: 16px"></div>
+
+          <h3>Usages recommandés</h3>
+          <ul class="feature-list">
+            <li><span class="check">✓</span> Installations de méthanisation</li>
+            <li><span class="check">✓</span> Lignes de compression de gaz</li>
+            <li><span class="check">✓</span> Réseaux nécessitant une meilleure pureté</li>
+            <li><span class="check">✓</span> Protection d’équipements sensibles</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="specs">
+      <div class="container">
+        <div class="section-header">
+          <div>
+            <h2>Caractéristiques techniques</h2>
+            <p>Tu peux bien sûr remplacer ces valeurs par les vraies données de ton filtre une fois le produit final défini.</p>
+          </div>
+        </div>
+
+        <div class="spec-grid">
+          <div class="card">
+            <div class="spec-item"><strong>Technologie</strong><span>Coalescence multicouche</span></div>
+            <div class="spec-item"><strong>Fluide</strong><span>Gaz avec aérosols d’huile</span></div>
+            <div class="spec-item"><strong>Pression max</strong><span>16 bar</span></div>
+            <div class="spec-item"><strong>Température</strong><span>-10°C à +80°C</span></div>
+            <div class="spec-item"><strong>Débit conseillé</strong><span>Jusqu’à 350 Nm³/h</span></div>
+          </div>
+
+          <div class="card">
+            <div class="spec-item"><strong>Matériau corps</strong><span>Aluminium / inox selon version</span></div>
+            <div class="spec-item"><strong>Entretien</strong><span>Cartouche remplaçable</span></div>
+            <div class="spec-item"><strong>Montage</strong><span>Horizontal ou vertical</span></div>
+            <div class="spec-item"><strong>Raccordements</strong><span>DN compatibles industrie</span></div>
+            <div class="spec-item"><strong>Garantie</strong><span>24 mois</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="section-header">
+          <div>
+            <h2>Ils recherchent surtout trois choses</h2>
+            <p>Sur un site pro, il faut rassurer vite : performance, fiabilité, retour d’expérience.</p>
+          </div>
+        </div>
+
+        <div class="testimonial-grid">
+          <article class="card testimonial">
+            <p>“Nous avions des traces d’huile dans la ligne après compression. L’ajout du filtre a immédiatement amélioré la propreté du réseau.”</p>
+            <strong>Responsable exploitation</strong>
+            <small>Site de valorisation énergétique</small>
+          </article>
+
+          <article class="card testimonial">
+            <p>“Le point fort est la simplicité de maintenance. Le remplacement de la cartouche est rapide et bien pensé.”</p>
+            <strong>Technicien maintenance</strong>
+            <small>Installation gaz industrielle</small>
+          </article>
+
+          <article class="card testimonial">
+            <p>“L’aspect premium du produit et la documentation technique facilitent la décision d’achat pour nos clients.”</p>
+            <strong>Ingénieur procédés</strong>
+            <small>Intégrateur d’équipements</small>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="faq">
+      <div class="container">
+        <div class="section-header">
+          <div>
+            <h2>Questions fréquentes</h2>
+            <p>Une FAQ bien faite donne une impression très professionnelle et réduit les frictions avant achat.</p>
+          </div>
+        </div>
+
+        <div class="faq-grid">
+          <details open>
+            <summary>À quoi sert exactement ce filtre ?</summary>
+            <p>Il sert à capter et séparer les brouillards d’huile présents dans un flux gazeux, notamment après compression, afin de protéger le réseau et les équipements aval.</p>
+          </details>
+
+          <details>
+            <summary>Peut-on l’installer sur une unité de méthanisation ?</summary>
+            <p>Oui, le principe du site et du produit s’y prête très bien. Il faut ensuite ajuster les données techniques au débit, à la pression et à la composition réelle du gaz.</p>
+          </details>
+
+          <details>
+            <summary>Le prix affiché est-il définitif ?</summary>
+            <p>Le prix affiché peut servir de base commerciale. Pour un vrai lancement, tu peux ajouter des variantes, des remises quantité et un configurateur.</p>
+          </details>
+
+          <details>
+            <summary>Y a-t-il un paiement en ligne réel ?</summary>
+            <p>Non, cette version est statique pour GitHub Pages. Pour un vrai e-commerce, il faudra connecter Stripe, Shopify ou un backend.</p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="contact">
+      <div class="container">
+        <div class="cta-banner">
+          <div>
+            <h2 style="font-size: clamp(1.8rem, 3vw, 2.6rem); margin-bottom: 10px; letter-spacing: -1px;">Prêt à présenter ton filtre comme un vrai produit industriel ?</h2>
+            <p style="color: var(--muted); max-width: 62ch;">Cette base peut être utilisée immédiatement sur GitHub Pages. Il suffit de remplacer les textes, le nom, les caractéristiques et éventuellement d’ajouter tes vraies photos.</p>
+          </div>
+          <div class="hero-actions" style="margin: 0;">
+            <a class="btn btn-primary" href="mailto:contact@oilguardpro.fr">Contacter le service commercial</a>
+            <a class="btn btn-secondary" href="#accueil">Revenir en haut</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-grid">
+      <div class="footer-brand">
+        <div class="brand">
+          <span class="brand-mark">OG</span>
+          <span>OilGuard Pro</span>
+        </div>
+        <p>Filtration coalescente pour réseaux de gaz, compresseurs et installations industrielles exigeantes.</p>
+      </div>
+
+      <div>
+        <h3 style="margin-bottom: 12px;">Produit</h3>
+        <ul>
+          <li><a href="#produit">OilGuard Pro X1</a></li>
+          <li><a href="#specs">Caractéristiques</a></li>
+          <li><a href="#faq">FAQ</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h3 style="margin-bottom: 12px;">Entreprise</h3>
+        <ul>
+          <li><a href="#solution">Notre mission</a></li>
+          <li><a href="#avantages">Avantages</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h3 style="margin-bottom: 12px;">Légal</h3>
+        <ul>
+          <li>Mentions légales</li>
+          <li>Politique de confidentialité</li>
+          <li>CGV</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="container copyright">
+      <span>© <span id="year"></span> OilGuard Pro — Tous droits réservés</span>
+      <span>Site vitrine e-commerce statique</span>
+    </div>
+  </footer>
+
+  <script>
+    const year = document.getElementById('year');
+    const buyNow = document.getElementById('buyNow');
+    const cartMessage = document.getElementById('cartMessage');
+
+    year.textContent = new Date().getFullYear();
+
+    buyNow.addEventListener('click', () => {
+      cartMessage.textContent = 'Produit ajouté au panier • Étape suivante : connecter un vrai système de paiement ou un formulaire de commande.';
+      buyNow.textContent = 'Ajouté ✓';
+      buyNow.disabled = true;
+      buyNow.style.opacity = '0.85';
+    });
+  </script>
+</body>
+</html>
